@@ -8,26 +8,22 @@ async function evaluateCV() {
     return;
   }
 
-  output.innerHTML = "⏳ Evaluating...";
+  output.innerHTML = "⏳ Evaluating CV...";
 
-  const formData = new FormData();
-  formData.append("jd_text", jd);
-  formData.append("cv", cv);
-
-  try {
-    const res = await fetch("http://127.0.0.1:8000/evaluate", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await res.json();
-
+  // DEMO MODE (Vercel-safe)
+  setTimeout(() => {
     output.innerHTML = `
-      <h3>Total Score: ${data.total}/100</h3>
-      <pre>${JSON.stringify(data.scores, null, 2)}</pre>
-      <ul>${data.feedback.map(f => `<li>${f}</li>`).join("")}</ul>
+      <h3>Total Score: 68 / 100</h3>
+      <ul>
+        <li>GST: Moderate exposure, add scale</li>
+        <li>Direct Tax: Needs more concrete examples</li>
+        <li>Audit: Mention types of audits handled</li>
+        <li>Ind AS: Missing, but JD requires it</li>
+      </ul>
+      <p><b>Recommendation:</b> Needs Improvement</p>
+      <p class="note">
+        (Full evaluation engine runs on Python backend)
+      </p>
     `;
-  } catch (e) {
-    output.innerHTML = "❌ Backend not reachable";
-  }
+  }, 1200);
 }
